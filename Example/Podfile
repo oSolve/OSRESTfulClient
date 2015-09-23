@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'OSRESTfulClient_Example', :exclusive => true do
+  pod "OSRESTfulClient", :path => "../"
+end
+
+target 'OSRESTfulClient_Tests', :exclusive => true do
+  pod "OSRESTfulClient", :path => "../"
+
+  pod 'Kiwi'
+end
