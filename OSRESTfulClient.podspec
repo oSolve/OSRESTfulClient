@@ -19,11 +19,11 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/OSRESTfulClient"
+  s.homepage         = "https://github.com/oSolve/OSRESTfulClient"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "TC94615" => "tclee0117@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/OSRESTfulClient.git", :tag => s.version.to_s }
+  s.author           = { "ch8908" => "kros@osolve.com" }
+  s.source           = { :git => "https://github.com/oSolve/OSRESTfulClient.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
