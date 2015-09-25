@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = "OSRESTfulClient"
   s.version          = "0.1.0"
-  s.summary          = "A short description of OSRESTfulClient."
+  s.summary          = "None"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+                        OSRESTfulClient is a http client obj
                        DESC
 
   s.homepage         = "https://github.com/oSolve/OSRESTfulClient"
@@ -34,7 +35,9 @@ Pod::Spec.new do |s|
     'OSRESTfulClient' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.public_header_files = 'Pod/Classes/**/*.h'
+  s.frameworks = 'UIKit', 'MapKit'
+  s.dependency 'AFNetworking', '~> 2.6.0'
+  s.dependency 'Mantle', '~> 2.0.2'
+  s.dependency 'Bolts', '~> 1.1.5'
 end
