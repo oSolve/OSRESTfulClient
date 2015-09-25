@@ -1,9 +1,9 @@
 # OSRESTfulClient
 
-[![CI Status](http://img.shields.io/travis/TC94615/OSRESTfulClient.svg?style=flat)](https://travis-ci.org/TC94615/OSRESTfulClient)
+<!-- [![CI Status](http://img.shields.io/travis/TC94615/OSRESTfulClient.svg?style=flat)](https://travis-ci.org/TC94615/OSRESTfulClient)
 [![Version](https://img.shields.io/cocoapods/v/OSRESTfulClient.svg?style=flat)](http://cocoapods.org/pods/OSRESTfulClient)
 [![License](https://img.shields.io/cocoapods/l/OSRESTfulClient.svg?style=flat)](http://cocoapods.org/pods/OSRESTfulClient)
-[![Platform](https://img.shields.io/cocoapods/p/OSRESTfulClient.svg?style=flat)](http://cocoapods.org/pods/OSRESTfulClient)
+[![Platform](https://img.shields.io/cocoapods/p/OSRESTfulClient.svg?style=flat)](http://cocoapods.org/pods/OSRESTfulClient) -->
 
 ## Usage
 
