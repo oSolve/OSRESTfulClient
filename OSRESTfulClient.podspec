@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "OSRESTfulClient"
-  s.version          = "0.1.1"
+  s.version          = "0.2.0"
   s.summary          = "None"
 
 # This description is used to generate tags and improve search results.
@@ -39,5 +39,5 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'AFNetworking', '~> 2.6.0'
   s.dependency 'Mantle', '~> 2.0.5'
-  s.dependency 'Bolts', '~> 1.1.5'
+  s.dependency 'Bolts', '~> 1.3.0'
 end
