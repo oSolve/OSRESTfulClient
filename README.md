@@ -22,7 +22,7 @@ pod "OSRESTfulClient"
 
 ## Author
 
-ch8908, kros@osolve.com
+Kros Huang, kros@osolve.com
 
 ## License
 
