@@ -14,7 +14,7 @@ OSRESTfulClient is a light-weight RESTful client for iOS APP. Inspired by [Retro
 Making a request is very easy, just use the builder pattern:
 
 ```objc
-OSRESTfulClient *client = /* create a client */
+OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue baseApiURLString:@"https://api.github.com"];
 NSString *path = [NSString stringWithFormat:@"/users/%@/repos", repoName];
 BFTask *request = client.builder
 						.withPath(path)
