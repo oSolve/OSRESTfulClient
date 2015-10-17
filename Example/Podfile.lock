@@ -37,11 +37,12 @@ PODS:
 
 DEPENDENCIES:
   - Kiwi
+  - Mantle (~> 2.0.5)
   - OSRESTfulClient (from `../`)
 
 EXTERNAL SOURCES:
   OSRESTfulClient:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05

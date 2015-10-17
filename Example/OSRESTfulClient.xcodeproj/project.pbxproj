@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		08E1CD8BDBB798B6625439AE /* Pods_OSRESTfulClient_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5F8BF2AF239D1F7437CB46 /* Pods_OSRESTfulClient_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		23D1A26F4A3B86D70A3F3E01 /* GithubService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A693C433C27D1569F2EF /* GithubService.m */; };
+		23D1A4ADD08030E384490387 /* OSRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A75BB13537E967ABDC75 /* OSRepo.m */; };
+		23D1A842A798A3BD6FA5C03B /* OSRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A75BB13537E967ABDC75 /* OSRepo.m */; };
+		23D1AC81CA19B79C1406ACEB /* GithubService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A693C433C27D1569F2EF /* GithubService.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -37,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		099755349E25C2116D67B435 /* Pods_OSRESTfulClient_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSRESTfulClient_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23D1A2A427385AAE7229D357 /* OSRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRepo.h; sourceTree = "<group>"; };
+		23D1A693C433C27D1569F2EF /* GithubService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GithubService.m; sourceTree = "<group>"; };
+		23D1A75BB13537E967ABDC75 /* OSRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSRepo.m; sourceTree = "<group>"; };
+		23D1AE1D45C044E927F84220 /* GithubService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubService.h; sourceTree = "<group>"; };
 		2F65A06A0E520975D02BBD51 /* Pods-OSRESTfulClient_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSRESTfulClient_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSRESTfulClient_Example/Pods-OSRESTfulClient_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5065203A8A16A34E7C59C78E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* OSRESTfulClient_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSRESTfulClient_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +101,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23D1A8B0C5564C2408E5DE56 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				23D1A75BB13537E967ABDC75 /* OSRepo.m */,
+				23D1A2A427385AAE7229D357 /* OSRepo.h */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +154,9 @@
 				6003F5A6195388D20070C39A /* OSViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				23D1A693C433C27D1569F2EF /* GithubService.m */,
+				23D1AE1D45C044E927F84220 /* GithubService.h */,
+				23D1A8B0C5564C2408E5DE56 /* model */,
 			);
 			name = "Example for OSRESTfulClient";
 			path = OSRESTfulClient;
@@ -393,6 +413,8 @@
 				6003F59E195388D20070C39A /* OSAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* OSViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				23D1AC81CA19B79C1406ACEB /* GithubService.m in Sources */,
+				23D1A842A798A3BD6FA5C03B /* OSRepo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +423,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				23D1A26F4A3B86D70A3F3E01 /* GithubService.m in Sources */,
+				23D1A4ADD08030E384490387 /* OSRepo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

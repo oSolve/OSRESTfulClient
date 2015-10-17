@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 TC94615. All rights reserved.
 //
 
-@import UIKit;
+@import UIKit;@class GithubService;
 
 @interface OSViewController : UIViewController
 

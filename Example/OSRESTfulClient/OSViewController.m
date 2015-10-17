@@ -6,22 +6,30 @@
 //  Copyright (c) 2015 TC94615. All rights reserved.
 //
 
+#import <OSRESTfulClient/OSRESTfulClient.h>
 #import "OSViewController.h"
+#import "GithubService.h"
 
-@interface OSViewController ()
+@interface OSViewController()
 
+@property (nonatomic, strong) GithubService *githubService;
 @end
 
 @implementation OSViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    operationQueue.maxConcurrentOperationCount = 5;
+    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue baseApiURLString:@"https://api.github.com"];
+    self.githubService = [[GithubService alloc] initWithClient:client];
+
+    [self.githubService listRepo:@"ch8908" completion:^(OSRepo *repo, NSError *error) {
+        NSLog(@">>>>>>>>>>>> repo = %@", repo);
+    }];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
