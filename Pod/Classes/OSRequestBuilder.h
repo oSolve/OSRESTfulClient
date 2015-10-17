@@ -50,7 +50,7 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestBuilder *)withPatch;
 
-- (OSRequestBuilder *(^)(NSString *path))withPath;
+- (OSRequestBuilder *(^)(NSString *format, ...))setPath;
 
 - (OSRequestBuilder *(^)(BOOL isJson))isJson;
 

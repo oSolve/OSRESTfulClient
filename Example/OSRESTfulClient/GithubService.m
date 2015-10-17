@@ -23,9 +23,8 @@
 }
 
 - (void)listRepo:(NSString *) repoName completion:(void (^)(OSRepo *, NSError *)) completion {
-    NSString *path = [NSString stringWithFormat:@"/users/%@/repos", repoName];
     BFTask *request = self.client.builder
-                          .withPath(path)
+                          .setPath(@"/users/%@/repos", repoName)
                           .withGet
                           .buildArrayWithModel([OSRepo class])
                           .request;

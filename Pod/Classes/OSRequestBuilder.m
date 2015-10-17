@@ -299,9 +299,14 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     };
 }
 
-- (OSRequestBuilder *(^)(NSString *))withPath {
-    return ^OSRequestBuilder *(NSString *path) {
-        NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
+- (OSRequestBuilder *(^)(NSString *format, ...))setPath {
+    return ^OSRequestBuilder *(NSString *format, ...) {
+        NSAssert([format characterAtIndex:0] == '/', @"path must be start with '/'");
+        NSString *path;
+        va_list vl;
+        va_start(vl, format);
+        path = [[NSString alloc] initWithFormat:format arguments:vl];
+        va_end(vl);
         self.path = path;
         return self;
     };
