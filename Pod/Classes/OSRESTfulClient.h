@@ -14,7 +14,7 @@
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, assign) BOOL enableLogger;
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue baseApiURLString:(NSString *) baseApiURLString;
+- (instancetype)initWithBaseApiURLString:(NSString *) baseApiURLString configuration:(NSURLSessionConfiguration *) configuration;
 
 - (OSRequestBuilder *)builder;
 @end

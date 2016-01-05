@@ -11,6 +11,7 @@
 #import "BFTaskCompletionSource.h"
 #import "OSRequestErrorHandlerProtocol.h"
 #import "OSRequestInterceptorProtocol.h"
+#import "AFHTTPSessionManager.h"
 
 NSString *const kRequestResponseObjectKey = @"kRequestResponseObjectKey";
 
@@ -27,50 +28,53 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, strong) NSURLRequest *urlRequest;
 @property (nonatomic, strong) Class modelClass;
 @property (nonatomic, assign) BOOL isArray;
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
 @property (nonatomic, assign) BOOL isMultipart;
 @property (nonatomic, assign) BOOL isJson;
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
+@property (nonatomic, strong) AFURLSessionManager *sessionManager;
 @end
 
 @implementation OSRequestable
-- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray operationQueue:(NSOperationQueue *) operationQueue isMultipart:(BOOL) isMultipart isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler {
+- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isMultipart:(BOOL) isMultipart isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager {
     self = [super init];
     if (self) {
         self.urlRequest = urlRequest;
         self.modelClass = modelClass;
         self.isArray = isArray;
-        self.operationQueue = operationQueue;
         self.isMultipart = isMultipart;
         self.isJson = isJson;
         self.enableLogger = enableLogger;
         self.errorHandler = errorHandler;
+        self.sessionManager = sessionManager;
     }
     return self;
 }
 
 - (BFTask *)request {
     _tcs = [BFTaskCompletionSource taskCompletionSource];
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:self.urlRequest];
+    if (self.enableLogger) {
+        NSLog(@"Making Request With Builder:%@, URL:%@, Body:%@, Model:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass);
+    }
+    NSURLSessionDataTask *task;
     if (self.isMultipart) {
-        [requestOperation setUploadProgressBlock:^(NSUInteger bytesWritten, long long int totalBytesWritten, long long int totalBytesExpectedToWrite) {
-            // TODO - pass out progress
-        }];
-    }
-    if (self.isJson) {
-        requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
+        [self.sessionManager uploadTaskWithRequest:self.urlRequest fromData:nil
+                                          progress:NULL
+                                 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                     [self handleResponse:responseObject error:error];
+                                 }];
     } else {
-        requestOperation.responseSerializer = [AFHTTPResponseSerializer serializer];
+        task = [self.sessionManager dataTaskWithRequest:self.urlRequest
+                                      completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                          [self handleResponse:responseObject error:error];
+                                      }];
     }
-    [requestOperation.responseSerializer setStringEncoding:NSUTF8StringEncoding];
-    [requestOperation
-      setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-          if (self.enableLogger) {
-              NSLog(@"Request Builder Success:%@, URL:%@, Body:%@, Model:%@, responseObject:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, responseObject);
-          }
-          [_tcs setResult:[self decodeResponseObject:responseObject]];
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [task resume];
+    return self.tcs.task;
+}
+
+- (void)handleResponse:(id) responseObject error:(NSError *) error {
+    if (error) {
         id data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
         NSString *errorMessage = [[NSString alloc] initWithData:data
                                                        encoding:NSUTF8StringEncoding];
@@ -78,15 +82,19 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
             NSLog(@"Request Builder Failed:%@, URL:%@, Body:%@, Model:%@, Error:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, error);
             NSLog(@"decode error message:%@", errorMessage);
         }
-        NSError *patchedError = [self getPatchedError:operation.responseObject error:error];
+        NSError *patchedError = [self getPatchedError:responseObject
+                                                error:error];
         if (self.errorHandler) {
             [_tcs setError:[self.errorHandler handlerError:patchedError]];
         } else {
             [_tcs setError:patchedError];
         }
-    }];
-    [self.operationQueue addOperation:requestOperation];
-    return self.tcs.task;
+    } else {
+        if (self.enableLogger) {
+            NSLog(@"Request Builder Success:%@, URL:%@, Body:%@, Model:%@, responseObject:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, responseObject);
+        }
+        [_tcs setResult:[self decodeResponseObject:responseObject]];
+    }
 }
 
 - (NSError *)getPatchedError:(id) responseObject error:(NSError *) error {
@@ -134,21 +142,21 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, strong) NSMutableDictionary *params;
 @property (nonatomic, strong) Class modelClass;
 @property (nonatomic, copy) NSString *path;
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
 @property (nonatomic, strong) NSMutableDictionary *header;
 @property (nonatomic, strong) NSDictionary *multipartData;
 @property (nonatomic, assign) BOOL isMultipart;
 @property (nonatomic, assign) BOOL isJsonFormat;
 @property (nonatomic, copy) NSString *multipartFileKey;
+@property (nonatomic, strong) AFURLSessionManager *sessionManager;
 @end
 
 @implementation OSRequestBuilder
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue baseURLString:(NSString *) baseURLString {
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager {
     self = [super init];
     if (self) {
-        _operationQueue = operationQueue;
         _baseUrlString = baseURLString;
+        _sessionManager = sessionManager;
         _isJsonFormat = YES;
     }
     return self;
@@ -348,8 +356,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     if (self.interceptor) {
         [self.interceptor intercept:self];
     }
-
-    NSString *escapedPath = [self.path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *escapedPath = [self.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSMutableURLRequest *request;
     if (self.isMultipart) {
         __weak typeof(self) weakSelf = self;
@@ -367,7 +374,14 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
                                                                     error:nil];
     }
     [self insertHeaderToRequest:request];
-    return [[OSRequestable alloc] initWithRequest:request modelClass:self.modelClass isArray:isArray operationQueue:self.operationQueue isMultipart:self.isMultipart isJson:self.isJsonFormat enableLogger:self.enableLogger errorHandler:self.errorHandler];
+    return [[OSRequestable alloc] initWithRequest:request
+                                       modelClass:self.modelClass
+                                          isArray:isArray
+                                      isMultipart:self.isMultipart
+                                           isJson:self.isJsonFormat
+                                     enableLogger:self.enableLogger
+                                     errorHandler:self.errorHandler
+                                   sessionManager:self.sessionManager];
 }
 
 - (void)appendMultipartData:(id<AFMultipartFormData>) formData {

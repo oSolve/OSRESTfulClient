@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08E1CD8BDBB798B6625439AE /* Pods_OSRESTfulClient_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5F8BF2AF239D1F7437CB46 /* Pods_OSRESTfulClient_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		08E1CD8BDBB798B6625439AE /* Pods_OSRESTfulClient_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5F8BF2AF239D1F7437CB46 /* Pods_OSRESTfulClient_Example.framework */; };
 		23D1A26F4A3B86D70A3F3E01 /* GithubService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A693C433C27D1569F2EF /* GithubService.m */; };
 		23D1A4ADD08030E384490387 /* OSRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A75BB13537E967ABDC75 /* OSRepo.m */; };
 		23D1A842A798A3BD6FA5C03B /* OSRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A75BB13537E967ABDC75 /* OSRepo.m */; };
@@ -26,7 +26,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		98099969CFB352A7212358F4 /* Pods_OSRESTfulClient_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099755349E25C2116D67B435 /* Pods_OSRESTfulClient_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		98099969CFB352A7212358F4 /* Pods_OSRESTfulClient_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099755349E25C2116D67B435 /* Pods_OSRESTfulClient_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
