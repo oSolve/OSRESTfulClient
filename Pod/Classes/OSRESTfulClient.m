@@ -8,7 +8,6 @@
 
 @interface OSRESTfulClient()
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
-@property (nonatomic, copy) NSString *baseURLString;
 @end
 
 @implementation OSRESTfulClient
@@ -19,11 +18,11 @@
     } @catch (NSException *__unused exception) {}
 }
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue baseApiURLString:(NSString *) baseApiURLString {
+- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTFulEndpoint *) endpoint {
     self = [super init];
     if (self) {
         self.operationQueue = operationQueue;
-        self.baseURLString = baseApiURLString;
+        self.endpoint = endpoint;
         [_operationQueue addObserver:self forKeyPath:NSStringFromSelector(@selector(operationCount))
                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }
@@ -32,7 +31,7 @@
 
 - (OSRequestBuilder *)builder {
     OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithQueue:self.operationQueue
-                                                          baseURLString:self.baseURLString];
+                                                          baseURLString:self.endpoint.baseURLString];
     if (self.errorHandler) {
         [builder setErrorHandler:self.errorHandler];
     }
