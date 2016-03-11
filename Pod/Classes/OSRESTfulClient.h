@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "OSRequestBuilder.h"
 
+@class OSRESTfulEndpoint;
 @protocol OSRequestInterceptorProtocol;
 @protocol OSRequestErrorHandlerProtocol;
 
@@ -14,7 +15,7 @@
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, assign) BOOL enableLogger;
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue baseApiURLString:(NSString *) baseApiURLString;
+- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTfulEndpoint *) endpoint;
 
 - (OSRequestBuilder *)builder;
 @end
