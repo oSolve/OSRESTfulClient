@@ -20,10 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-    operationQueue.maxConcurrentOperationCount = 5;
-    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue
-                                                            endpoint:[[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"]];
+    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:[[OSRESTfulEndpoint alloc] initWithBaseURLString:@"http://localhost:3000"]
+                                                          configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    client.enableLogger = YES;
     self.githubService = [[GithubService alloc] initWithClient:client];
     [self.githubService listRepo:@"ch8908" completion:^(OSRepo *repo, NSError *error) {
         NSLog(@">>>>>>>>>>>> repo = %@", repo);

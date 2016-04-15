@@ -7,8 +7,7 @@
             buildForRunning = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "OSRESTfulClient_Example.app"
+               BuildableName = "OSRESTfulClient_Example"
                BlueprintName = "OSRESTfulClient_Example"
                ReferencedContainer = "container:OSRESTfulClient.xcodeproj">
             </BuildableReference>
@@ -21,8 +20,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "OSRESTfulClient_Example.app"
+            BuildableName = "OSRESTfulClient_Example"
             BlueprintName = "OSRESTfulClient_Example"
             ReferencedContainer = "container:OSRESTfulClient.xcodeproj">
          </BuildableReference>
