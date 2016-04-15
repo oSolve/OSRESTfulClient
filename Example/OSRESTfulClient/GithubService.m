@@ -22,12 +22,12 @@
     return self;
 }
 
-- (void)listRepo:(NSString *) repoName completion:(void (^)(OSRepo *, NSError *)) completion {
-    NSString *path = [NSString stringWithFormat:@"/users/%@/repos", repoName];
+- (void)fetchPost:(NSString *) postId completion:(void (^)(OSRepo *, NSError *)) completion {
+    NSString *path = [NSString stringWithFormat:@"/posts/%@", postId];
     BFTask *request = self.client.builder
-                          .withPath(path)
+                          .setPath(path)
                           .withGet
-                          .buildArrayWithModel([OSRepo class])
+                          .buildRawData
                           .request;
     [request continueWithBlock:^id(BFTask *task) {
         if (completion) {

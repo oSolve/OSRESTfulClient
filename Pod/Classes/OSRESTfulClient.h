@@ -15,7 +15,7 @@
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, assign) BOOL enableLogger;
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTfulEndpoint *) endpoint;
+- (instancetype)initWithEndpoint:(OSRESTfulEndpoint *) endpoint configuration:(NSURLSessionConfiguration *) configuration;
 
 - (OSRequestBuilder *)builder;
 @end
