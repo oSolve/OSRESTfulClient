@@ -9,6 +9,7 @@
 #import <OSRESTfulClient/OSRESTfulClient.h>
 #import "OSViewController.h"
 #import "GithubService.h"
+#import <OSRESTfulClient/OSRESTfulEndpoint.h>
 
 @interface OSViewController()
 
@@ -19,11 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithBaseApiURLString:@"http://localhost:3000"
-                                                                  configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    client.enableLogger = YES;
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    operationQueue.maxConcurrentOperationCount = 5;
+    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue
+                                                            endpoint:[[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"]];
     self.githubService = [[GithubService alloc] initWithClient:client];
-    [self.githubService fetchPost:@"1" completion:^(OSRepo *repo, NSError *error) {
+    [self.githubService listRepo:@"ch8908" completion:^(OSRepo *repo, NSError *error) {
         NSLog(@">>>>>>>>>>>> repo = %@", repo);
     }];
 }

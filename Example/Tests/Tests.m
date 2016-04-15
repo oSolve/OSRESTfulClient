@@ -8,38 +8,23 @@
 
 // https://github.com/kiwi-bdd/Kiwi
 
+#import <OSRESTfulClient/OSRESTfulEndpoint.h>
+
 SPEC_BEGIN(InitialTests)
 
-describe(@"My initial tests", ^{
-
-  context(@"will fail", ^{
-
-      it(@"can do maths", ^{
-          [[@1 should] equal:@2];
-      });
-
-      it(@"can read", ^{
-          [[@"number" should] equal:@"string"];
-      });
-    
-      it(@"will wait and fail", ^{
-          NSObject *object = [[NSObject alloc] init];
-          [[expectFutureValue(object) shouldEventually] receive:@selector(autoContentAccessingProxy)];
-      });
-  });
-
-  context(@"will pass", ^{
-    
-      it(@"can do maths", ^{
-        [[@1 should] beLessThan:@23];
-      });
-    
-      it(@"can read", ^{
-          [[@"team" shouldNot] containString:@"I"];
-      });  
-  });
-  
-});
+    describe(@"Endpoint tests", ^{
+        context(@"Base URL tests", ^{
+            it(@"Init base URL", ^{
+                OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
+                [[endpoint.baseURLString should] equal:@"https://api.github.com"];
+            });
+            it(@"Update base URL", ^{
+                OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
+                [endpoint updateBaseURLString:@"https://api.github.com.tw"];
+                [[endpoint.baseURLString should] equal:@"https://api.github.com.tw"];
+            });
+        });
+    });
 
 SPEC_END
 

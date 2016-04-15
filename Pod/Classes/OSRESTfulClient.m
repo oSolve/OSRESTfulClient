@@ -4,38 +4,36 @@
 //
 
 #import "OSRESTfulClient.h"
-#import "AFHTTPSessionManager.h"
-#import <UIKit/UIKit.h>
+#import "OSRESTfulEndpoint.h"
 
 @interface OSRESTfulClient()
-@property (nonatomic, copy) NSString *baseURLString;
-@property (nonatomic, strong) AFURLSessionManager *manager;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
+@property (nonatomic, readonly, strong) OSRESTfulEndpoint *endpoint;
 @end
 
 @implementation OSRESTfulClient
 
 - (void)dealloc {
     @try {
-        [self.manager.operationQueue removeObserver:self forKeyPath:NSStringFromSelector(@selector(operationCount))];
+        [_operationQueue removeObserver:self forKeyPath:NSStringFromSelector(@selector(operationCount))];
     } @catch (NSException *__unused exception) {}
 }
 
-- (instancetype)initWithBaseApiURLString:(NSString *) baseApiURLString configuration:(NSURLSessionConfiguration *) configuration {
+- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTfulEndpoint *) endpoint {
     self = [super init];
     if (self) {
-        _baseURLString = baseApiURLString;
-        _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        _manager.operationQueue.maxConcurrentOperationCount = 5;
-        [self.manager.operationQueue addObserver:self forKeyPath:NSStringFromSelector(@selector(operationCount))
-                                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                                         context:nil];
+        NSAssert(endpoint, @"Endpoint cannot be nil.");
+        self.operationQueue = operationQueue;
+        _endpoint = endpoint;
+        [_operationQueue addObserver:self forKeyPath:NSStringFromSelector(@selector(operationCount))
+                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
 
 - (OSRequestBuilder *)builder {
-    OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:self.baseURLString
-                                                                 sessionManager:self.manager];
+    OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithQueue:self.operationQueue
+                                                          baseURLString:self.endpoint.baseURLString];
     if (self.errorHandler) {
         [builder setErrorHandler:self.errorHandler];
     }
