@@ -14,6 +14,8 @@
 @property (nonatomic, strong) id<OSRequestInterceptorProtocol> interceptor;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, assign) BOOL enableLogger;
+@property (nonatomic, strong) OSRESTFulEndpoint *endpoint;
+
 
 - (instancetype)initWithEndpoint:(OSRESTfulEndpoint *) endpoint configuration:(NSURLSessionConfiguration *) configuration;
 
