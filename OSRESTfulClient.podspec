@@ -38,5 +38,5 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Pod/Classes/**/*.h'
   s.dependency 'AFNetworking', '~> 2.6.0'
   s.dependency 'Mantle', '~> 2.0.5'
-  s.dependency 'Bolts', '~> 1.5.0'
+  s.dependency 'Bolts', '~> 1.7.0'
 end
