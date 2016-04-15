@@ -6,10 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "OSRequestBuilder.h"
 
-@interface OSRESTFulEndpoint:NSObject
-@property (nonatomic, copy) NSString *baseURLString;
-@end
-
+@class OSRESTfulEndpoint;
 @protocol OSRequestInterceptorProtocol;
 @protocol OSRequestErrorHandlerProtocol;
 
@@ -19,7 +16,8 @@
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) OSRESTFulEndpoint *endpoint;
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTFulEndpoint *) endpoint;
+
+- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTfulEndpoint *) endpoint;
 
 - (OSRequestBuilder *)builder;
 @end

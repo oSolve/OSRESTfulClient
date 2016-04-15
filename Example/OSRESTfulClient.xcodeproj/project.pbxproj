@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08E1CD8BDBB798B6625439AE /* Pods_OSRESTfulClient_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5F8BF2AF239D1F7437CB46 /* Pods_OSRESTfulClient_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0EFE07207CC4A64B4F042DD1 /* Pods_OSRESTfulClient_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3999D44C2BBC276BCBFC37B0 /* Pods_OSRESTfulClient_Example.framework */; };
 		23D1A26F4A3B86D70A3F3E01 /* GithubService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A693C433C27D1569F2EF /* GithubService.m */; };
 		23D1A4ADD08030E384490387 /* OSRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A75BB13537E967ABDC75 /* OSRepo.m */; };
 		23D1A842A798A3BD6FA5C03B /* OSRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A75BB13537E967ABDC75 /* OSRepo.m */; };
 		23D1AC81CA19B79C1406ACEB /* GithubService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1A693C433C27D1569F2EF /* GithubService.m */; };
+		4603661269DB59A3BAD0258A /* Pods_OSRESTfulClient_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B03CD61FD6378E8D051820 /* Pods_OSRESTfulClient_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -26,7 +27,6 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		98099969CFB352A7212358F4 /* Pods_OSRESTfulClient_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099755349E25C2116D67B435 /* Pods_OSRESTfulClient_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,12 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		099755349E25C2116D67B435 /* Pods_OSRESTfulClient_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSRESTfulClient_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D1A2A427385AAE7229D357 /* OSRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRepo.h; sourceTree = "<group>"; };
 		23D1A693C433C27D1569F2EF /* GithubService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GithubService.m; sourceTree = "<group>"; };
 		23D1A75BB13537E967ABDC75 /* OSRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSRepo.m; sourceTree = "<group>"; };
 		23D1AE1D45C044E927F84220 /* GithubService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubService.h; sourceTree = "<group>"; };
+		29B03CD61FD6378E8D051820 /* Pods_OSRESTfulClient_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSRESTfulClient_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F65A06A0E520975D02BBD51 /* Pods-OSRESTfulClient_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSRESTfulClient_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSRESTfulClient_Example/Pods-OSRESTfulClient_Example.release.xcconfig"; sourceTree = "<group>"; };
+		3999D44C2BBC276BCBFC37B0 /* Pods_OSRESTfulClient_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSRESTfulClient_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5065203A8A16A34E7C59C78E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* OSRESTfulClient_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSRESTfulClient_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,7 +72,6 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9866DBBDF52B29A045A6DEF7 /* Pods-OSRESTfulClient_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSRESTfulClient_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSRESTfulClient_Tests/Pods-OSRESTfulClient_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AE84526DBE6F3BC547A0860B /* Pods-OSRESTfulClient_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSRESTfulClient_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSRESTfulClient_Tests/Pods-OSRESTfulClient_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		EA5F8BF2AF239D1F7437CB46 /* Pods_OSRESTfulClient_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSRESTfulClient_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAA1D46743928E524BDCA4F /* Pods-OSRESTfulClient_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSRESTfulClient_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSRESTfulClient_Example/Pods-OSRESTfulClient_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				08E1CD8BDBB798B6625439AE /* Pods_OSRESTfulClient_Example.framework in Frameworks */,
+				0EFE07207CC4A64B4F042DD1 /* Pods_OSRESTfulClient_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				98099969CFB352A7212358F4 /* Pods_OSRESTfulClient_Tests.framework in Frameworks */,
+				4603661269DB59A3BAD0258A /* Pods_OSRESTfulClient_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +138,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				EA5F8BF2AF239D1F7437CB46 /* Pods_OSRESTfulClient_Example.framework */,
-				099755349E25C2116D67B435 /* Pods_OSRESTfulClient_Tests.framework */,
+				3999D44C2BBC276BCBFC37B0 /* Pods_OSRESTfulClient_Example.framework */,
+				29B03CD61FD6378E8D051820 /* Pods_OSRESTfulClient_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

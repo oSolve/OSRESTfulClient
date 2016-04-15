@@ -8,6 +8,7 @@
 @class BFTask;
 @protocol OSRequestErrorHandlerProtocol;
 @protocol OSRequestInterceptorProtocol;
+@class AFURLSessionManager;
 
 // Has No Return value
 @interface OSVoidType : NSObject
@@ -28,7 +29,7 @@ extern NSString *const kRequestResponseObjectKey;
 @property (nonatomic, strong) id<OSRequestInterceptorProtocol> interceptor;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue baseURLString:(NSString *) baseURLString;
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager;
 
 - (OSRequestBuilder *)withOptions;
 
@@ -50,7 +51,7 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestBuilder *)withPatch;
 
-- (OSRequestBuilder *(^)(NSString *path))withPath;
+- (OSRequestBuilder *(^)(NSString *))setPath;
 
 - (OSRequestBuilder *(^)(BOOL isJson))isJson;
 

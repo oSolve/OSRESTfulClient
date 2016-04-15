@@ -4,10 +4,11 @@
 //
 
 #import "OSRESTfulClient.h"
-#import <UIKit/UIKit.h>
+#import "OSRESTfulEndpoint.h"
 
 @interface OSRESTfulClient()
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
+@property (nonatomic, readonly, strong) OSRESTfulEndpoint *endpoint;
 @end
 
 @implementation OSRESTfulClient
@@ -18,11 +19,12 @@
     } @catch (NSException *__unused exception) {}
 }
 
-- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTFulEndpoint *) endpoint {
+- (instancetype)initWithQueue:(NSOperationQueue *) operationQueue endpoint:(OSRESTfulEndpoint *) endpoint {
     self = [super init];
     if (self) {
+        NSAssert(endpoint, @"Endpoint cannot be nil.");
         self.operationQueue = operationQueue;
-        self.endpoint = endpoint;
+        _endpoint = endpoint;
         [_operationQueue addObserver:self forKeyPath:NSStringFromSelector(@selector(operationCount))
                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }

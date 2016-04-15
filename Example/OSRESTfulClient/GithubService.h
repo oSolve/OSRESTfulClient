@@ -10,5 +10,5 @@
 @interface GithubService : NSObject
 - (instancetype)initWithClient:(OSRESTfulClient *) client;
 
-- (void)listRepo:(NSString *) repoName completion:(void (^)(OSRepo *, NSError *)) completion;
+- (void)fetchPost:(NSString *) postId completion:(void (^)(OSRepo *, NSError *)) completion;
 @end
