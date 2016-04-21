@@ -80,7 +80,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
                                                        encoding:NSUTF8StringEncoding];
         if (self.enableLogger) {
             NSLog(@"Request Builder Failed:%@, URL:%@, Body:%@, Model:%@, Error:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, error);
-            NSLog(@"decode error message:%@", errorMessage);
+            NSLog(@"Decoded response error message:%@", errorMessage);
         }
         NSError *patchedError = [self getPatchedError:responseObject
                                                 error:error];
@@ -122,15 +122,25 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     }
 
     if (![self.modelClass isSubclassOfClass:[MTLModel class]]) {
-        NSAssert(false, @"model class must be one of OSVoidType, OSRawDataType or subclass of MTLModel");
+        NSAssert(false, @"Model class must be one of OSVoidType, OSRawDataType or subclass of MTLModel");
     }
 
     if (self.isArray) {
-        NSAssert([responseObject isKindOfClass:[NSArray class]], @"Decode failed, result should be array.");
-        return [MTLJSONAdapter modelsOfClass:self.modelClass fromJSONArray:responseObject error:nil];
+        NSAssert([responseObject isKindOfClass:[NSArray class]], @"Model Decode failed, result should be array.");
+        NSError *error = nil;
+        NSArray *array = [MTLJSONAdapter modelsOfClass:self.modelClass fromJSONArray:responseObject error:&error];
+        if (self.enableLogger && error) {
+            NSLog(@"Model decode failed, error message:%@", error);
+        }
+        return array;
     } else {
-        NSAssert([responseObject isKindOfClass:[NSDictionary class]], @"Decode failed, result should be dictionary");
-        return [MTLJSONAdapter modelOfClass:self.modelClass fromJSONDictionary:responseObject error:nil];
+        NSAssert([responseObject isKindOfClass:[NSDictionary class]], @"Model Decode failed, result should be dictionary");
+        NSError *error = nil;
+        id object = [MTLJSONAdapter modelOfClass:self.modelClass fromJSONDictionary:responseObject error:&error];
+        if (self.enableLogger && error) {
+            NSLog(@"Model decode failed, error message:%@", error);
+        }
+        return object;
     }
 }
 
