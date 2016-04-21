@@ -24,7 +24,7 @@
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     client.enableLogger = YES;
     self.githubService = [[GithubService alloc] initWithClient:client];
-    [self.githubService listRepo:@"ch8908" completion:^(OSRepo *repo, NSError *error) {
+    [self.githubService fetchPost:@"ch8908" completion:^(OSRepo *repo, NSError *error) {
         NSLog(@">>>>>>>>>>>> repo = %@", repo);
     }];
 }
