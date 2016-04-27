@@ -4,6 +4,7 @@
 //
 
 #import <Bolts/BFTask.h>
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "AFHTTPRequestOperation.h"
 #import "MTLModel.h"
 #import "MTLJSONAdapter.h"
@@ -33,6 +34,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
+@property (nonatomic, strong) AFNetworkActivityIndicatorManager *networkActivityIndicatorManager;
 @end
 
 @implementation OSRequestable
@@ -47,6 +49,8 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         self.enableLogger = enableLogger;
         self.errorHandler = errorHandler;
         self.sessionManager = sessionManager;
+        self.networkActivityIndicatorManager = [AFNetworkActivityIndicatorManager sharedManager];
+        self.networkActivityIndicatorManager.enabled = YES;
     }
     return self;
 }
@@ -56,6 +60,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     if (self.enableLogger) {
         NSLog(@"Making Request With Builder:%@, URL:%@, Body:%@, Model:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass);
     }
+    [self.networkActivityIndicatorManager incrementActivityCount];
     NSURLSessionDataTask *task;
     if (self.isMultipart) {
         [self.sessionManager uploadTaskWithRequest:self.urlRequest fromData:nil
@@ -74,6 +79,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 }
 
 - (void)handleResponse:(id) responseObject error:(NSError *) error {
+    [self.networkActivityIndicatorManager decrementActivityCount];
     if (error) {
         id data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
         NSString *errorMessage = [[NSString alloc] initWithData:data
