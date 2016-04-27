@@ -29,7 +29,7 @@ extern NSString *const kRequestResponseObjectKey;
 @property (nonatomic, strong) id<OSRequestInterceptorProtocol> interceptor;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 
-- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager;
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate;
 
 - (OSRequestBuilder *)withOptions;
 
