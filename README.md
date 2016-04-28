@@ -15,9 +15,22 @@ Making a request is very easy, just use the builder pattern:
 
 ```objc
 OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue baseApiURLString:@"https://api.github.com"];
-NSString *path = [NSString stringWithFormat:@"/users/%@/repos", repoName];
+NSString *path = @"/users/{user_id}/repos"
+NSDictionary *params = @{@"user_id" : userId}
 BFTask *request = client.builder
-						.withPath(path)
+						.setPathAndParams(path, params)
+						.withGet
+						.buildArrayWithModel([OSRepo class])
+						.request;
+```
+
+Or
+
+```objc
+OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue baseApiURLString:@"https://api.github.com"];
+NSString *path = @"/repos"
+BFTask *request = client.builder
+						.setPath(path)
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;

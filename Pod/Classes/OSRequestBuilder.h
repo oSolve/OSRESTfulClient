@@ -28,8 +28,9 @@ extern NSString *const kRequestResponseObjectKey;
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) id<OSRequestInterceptorProtocol> interceptor;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
+@property (nonatomic, readonly, copy) NSString *path;
 
-- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager;
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate;
 
 - (OSRequestBuilder *)withOptions;
 
@@ -51,7 +52,9 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestBuilder *)withPatch;
 
-- (OSRequestBuilder *(^)(NSString *))setPath;
+- (OSRequestBuilder *(^)(NSString *path))setPath;
+
+- (OSRequestBuilder *(^)(NSString *path, NSDictionary *params))setPathAndParams;
 
 - (OSRequestBuilder *(^)(BOOL isJson))isJson;
 

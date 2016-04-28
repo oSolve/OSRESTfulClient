@@ -23,9 +23,8 @@
 }
 
 - (void)fetchPost:(NSString *) postId completion:(void (^)(OSRepo *, NSError *)) completion {
-    NSString *path = [NSString stringWithFormat:@"/posts/%@", postId];
     BFTask *request = self.client.builder
-                          .setPath(path)
+                          .setPathAndParams(@"/posts/{postId}", @{@"postId" : postId})
                           .withGet
                           .buildRawData
                           .request;
