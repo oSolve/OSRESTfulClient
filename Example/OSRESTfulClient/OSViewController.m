@@ -20,6 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /* Use @"http://jsonplaceholder.typicode.com" instead of @"http://localhost:3000/posts"
+     * since we want to observe the behavior of network activity indicator.
+     * */
     OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:[[OSRESTfulEndpoint alloc] initWithBaseURLString:@"http://jsonplaceholder.typicode.com"]
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     client.enableLogger = YES;
