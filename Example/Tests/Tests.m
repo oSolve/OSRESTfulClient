@@ -42,12 +42,25 @@ SPEC_BEGIN(InitialTests)
                 builder.setPath(@"/posts/{id}", @{@"id" : @"1"});
                 [[builder.path should] equal:@"/posts/1"];
             });
+            it(@"No parameter but one argument", ^{
+                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
+                                                                             sessionManager:[AFURLSessionManager mock]];
+                builder.setPath(@"/posts/{id}", nil);
+                [[builder.path should] equal:@"/posts/{id}"];
+            });
             it(@"Two parameters", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]];
                 builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sid" : @"aaa"});
                 [[builder.path should] equal:@"/posts/1/aaa.json"];
             });
+            it(@"One parameters but two arguments", ^{
+                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
+                                                                             sessionManager:[AFURLSessionManager mock]];
+                builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1"});
+                [[builder.path should] equal:@"/posts/1/{sid}.json"];
+            });
+
         });
     });
 
