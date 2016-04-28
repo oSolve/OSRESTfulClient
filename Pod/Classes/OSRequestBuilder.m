@@ -98,7 +98,9 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         }
         [_tcs setResult:[self decodeResponseObject:responseObject]];
     }
-    self.terminate();
+    if (self.terminate) {
+        self.terminate();
+    }
 }
 
 - (NSError *)getPatchedError:(id) responseObject error:(NSError *) error {
