@@ -13,6 +13,7 @@
 #import "OSRequestErrorHandlerProtocol.h"
 #import "OSRequestInterceptorProtocol.h"
 #import "AFHTTPSessionManager.h"
+#import <RegExCategories/RegExCategories.h>
 
 NSString *const kRequestResponseObjectKey = @"kRequestResponseObjectKey";
 
@@ -157,7 +158,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, copy) NSString *method;
 @property (nonatomic, strong) NSMutableDictionary *params;
 @property (nonatomic, strong) Class modelClass;
-@property (nonatomic, copy) NSString *path;
 @property (nonatomic, strong) NSMutableDictionary *header;
 @property (nonatomic, strong) NSDictionary *multipartData;
 @property (nonatomic, assign) BOOL isMultipart;
@@ -225,12 +225,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 
 - (OSRequestBuilder *)withMultipart {
     self.isMultipart = YES;
-    return self;
-}
-
-- (OSRequestBuilder *)withPath:(NSString *) path {
-    NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
-    self.path = path;
     return self;
 }
 
@@ -323,10 +317,16 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     };
 }
 
-- (OSRequestBuilder *(^)(NSString *))setPath {
-    return ^OSRequestBuilder *(NSString *path) {
+- (OSRequestBuilder *(^)(NSString *path, NSDictionary *mappers))setPath {
+    return ^OSRequestBuilder *(NSString *path, NSDictionary *mappers) {
         NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
-        self.path = path;
+        if (mappers) {
+            for (id key in mappers) {
+                NSString *pattern = [NSString stringWithFormat:@"\\{%@\\}", key];
+                path = [path replace:RX(pattern) with:mappers[key]];
+            }
+        }
+        _path = path;
         return self;
     };
 }
