@@ -34,11 +34,14 @@ PODS:
     - AFNetworking (~> 2.6.0)
     - Bolts (~> 1.7.0)
     - Mantle (~> 2.0.7)
+    - RegExCategories (~> 1.0)
+  - RegExCategories (1.0)
 
 DEPENDENCIES:
   - Kiwi
   - Mantle (~> 2.0.7)
   - OSRESTfulClient (from `../`)
+  - RegExCategories (~> 1.0)
 
 EXTERNAL SOURCES:
   OSRESTfulClient:
@@ -49,6 +52,7 @@ SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
-  OSRESTfulClient: 8f198ae7f3a98234546c18339d2d19021e41eb38
+  OSRESTfulClient: cce6b7625c01236407bd57f22df2ed46090fddcf
+  RegExCategories: e68befacacd5bda853c88f70ec745cb2d0cfb89c
 
 COCOAPODS: 0.39.0

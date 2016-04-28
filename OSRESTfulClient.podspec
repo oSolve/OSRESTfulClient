@@ -39,4 +39,5 @@ Pod::Spec.new do |s|
   s.dependency 'AFNetworking', '~> 2.6.0'
   s.dependency 'Mantle', '~> 2.0.7'
   s.dependency 'Bolts', '~> 1.7.0'
+  s.dependency 'RegExCategories', '~> 1.0'
 end
