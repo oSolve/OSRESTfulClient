@@ -31,21 +31,22 @@ SPEC_BEGIN(InitialTests)
     describe(@"Builder tests", ^{
         context(@"Set path tests", ^{
             it(@"No parameter", ^{
-                OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"http://localhost:3000"];
-                AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:endpoint.baseURLString
-                                                                             sessionManager:manager];
-                builder.setPath(@"/posts/1");
+                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
+                                                                             sessionManager:[AFURLSessionManager mock]];
+                builder.setPath(@"/posts/", nil);
+                [[builder.path should] equal:@"/posts/"];
             });
             it(@"One parameter", ^{
-                OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"http://localhost:3000"];
-                AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:endpoint.baseURLString
-                                                                             sessionManager:manager];
+                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
+                                                                             sessionManager:[AFURLSessionManager mock]];
                 builder.setPath(@"/posts/{id}", @{@"id" : @"1"});
+                [[builder.path should] equal:@"/posts/1"];
             });
             it(@"Two parameters", ^{
-
+                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
+                                                                             sessionManager:[AFURLSessionManager mock]];
+                builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sid" : @"aaa"});
+                [[builder.path should] equal:@"/posts/1/aaa.json"];
             });
         });
     });
