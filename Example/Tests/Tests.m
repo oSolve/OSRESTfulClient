@@ -34,49 +34,49 @@ SPEC_BEGIN(InitialTests)
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/", nil);
+                builder.setPath(@"/posts/");
                 [[builder.path should] equal:@"/posts/"];
             });
             it(@"One parameter", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/{id}", @{@"id" : @"1"});
+                builder.setPathWithMappers(@"/posts/{id}", @{@"id" : @"1"});
                 [[builder.path should] equal:@"/posts/1"];
             });
             it(@"No parameter but one argument", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/{id}", nil);
+                builder.setPath(@"/posts/{id}");
                 [[builder.path should] equal:@"/posts/{id}"];
             });
             it(@"Two parameters", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sid" : @"aaa"});
+                builder.setPathWithMappers(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sid" : @"aaa"});
                 [[builder.path should] equal:@"/posts/1/aaa.json"];
             });
             it(@"One parameters but two arguments", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1"});
+                builder.setPathWithMappers(@"/posts/{id}/{sid}.json", @{@"id" : @"1"});
                 [[builder.path should] equal:@"/posts/1/{sid}.json"];
             });
             it(@"Two parameters, one of that is incorrect pattern", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sLd" : @"aaa"});
+                builder.setPathWithMappers(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sLd" : @"aaa"});
                 [[builder.path should] equal:@"/posts/1/{sid}.json"];
             });
             it(@"Three parameters but two arguments", ^{
                 OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
                                                                              sessionManager:[AFURLSessionManager mock]
                                                                                   terminate:nil];
-                builder.setPath(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sid" : @"aaa", @"tid" : @"a1a1"});
+                builder.setPathWithMappers(@"/posts/{id}/{sid}.json", @{@"id" : @"1", @"sid" : @"aaa", @"tid" : @"a1a1"});
                 [[builder.path should] equal:@"/posts/1/aaa.json"];
             });
         });

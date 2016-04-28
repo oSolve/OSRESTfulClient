@@ -24,7 +24,7 @@
 
 - (void)fetchPost:(NSString *) postId completion:(void (^)(OSRepo *, NSError *)) completion {
     BFTask *request = self.client.builder
-                          .setPath(@"/posts/{postId}", @{@"postId" : postId})
+                          .setPathWithMappers(@"/posts/{postId}", @{@"postId" : postId})
                           .withGet
                           .buildRawData
                           .request;

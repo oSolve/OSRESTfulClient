@@ -318,7 +318,15 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     };
 }
 
-- (OSRequestBuilder *(^)(NSString *path, NSDictionary *mappers))setPath {
+- (OSRequestBuilder *(^)(NSString *path))setPath{
+    return ^OSRequestBuilder *(NSString *path) {
+        NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
+        _path = path;
+        return self;
+    };
+}
+
+- (OSRequestBuilder *(^)(NSString *path, NSDictionary *mappers))setPathWithMappers {
     return ^OSRequestBuilder *(NSString *path, NSDictionary *mappers) {
         NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
         if (mappers) {

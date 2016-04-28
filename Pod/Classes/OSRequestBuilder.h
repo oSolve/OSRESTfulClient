@@ -52,7 +52,9 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestBuilder *)withPatch;
 
-- (OSRequestBuilder *(^)(NSString *path, NSDictionary *mappers))setPath;
+- (OSRequestBuilder *(^)(NSString *path))setPath;
+
+- (OSRequestBuilder *(^)(NSString *path, NSDictionary *mappers))setPathWithMappers;
 
 - (OSRequestBuilder *(^)(BOOL isJson))isJson;
 
