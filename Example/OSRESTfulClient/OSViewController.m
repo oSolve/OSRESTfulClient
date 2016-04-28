@@ -20,11 +20,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:[[OSRESTfulEndpoint alloc] initWithBaseURLString:@"http://localhost:3000"]
+    /* Use @"http://jsonplaceholder.typicode.com" instead of @"http://localhost:3000/posts"
+     * since we want to observe the behavior of network activity indicator.
+     * */
+    OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:[[OSRESTfulEndpoint alloc] initWithBaseURLString:@"http://jsonplaceholder.typicode.com"]
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     client.enableLogger = YES;
     self.githubService = [[GithubService alloc] initWithClient:client];
-    [self.githubService fetchPost:@"ch8908" completion:^(OSRepo *repo, NSError *error) {
+    [self.githubService fetchPost:@"1" completion:^(OSRepo *repo, NSError *error) {
+        NSLog(@">>>>>>>>>>>> repo = %@", repo);
+    }];
+    [self.githubService fetchPost:@"2" completion:^(OSRepo *repo, NSError *error) {
+        NSLog(@">>>>>>>>>>>> repo = %@", repo);
+    }];
+    [self.githubService fetchPost:@"3" completion:^(OSRepo *repo, NSError *error) {
+        NSLog(@">>>>>>>>>>>> repo = %@", repo);
+    }];
+    [self.githubService fetchPost:@"4" completion:^(OSRepo *repo, NSError *error) {
+        NSLog(@">>>>>>>>>>>> repo = %@", repo);
+    }];
+    [self.githubService fetchPost:@"5" completion:^(OSRepo *repo, NSError *error) {
+        NSLog(@">>>>>>>>>>>> repo = %@", repo);
+    }];
+    [self.githubService fetchPost:@"6" completion:^(OSRepo *repo, NSError *error) {
         NSLog(@">>>>>>>>>>>> repo = %@", repo);
     }];
 }

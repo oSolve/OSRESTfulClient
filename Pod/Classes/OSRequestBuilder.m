@@ -35,11 +35,11 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
-@property (nonatomic, strong) AFNetworkActivityIndicatorManager *networkActivityIndicatorManager;
+@property (nonatomic, copy) void (^terminate)();
 @end
 
 @implementation OSRequestable
-- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isMultipart:(BOOL) isMultipart isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager {
+- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isMultipart:(BOOL) isMultipart isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate {
     self = [super init];
     if (self) {
         self.urlRequest = urlRequest;
@@ -50,8 +50,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         self.enableLogger = enableLogger;
         self.errorHandler = errorHandler;
         self.sessionManager = sessionManager;
-        self.networkActivityIndicatorManager = [AFNetworkActivityIndicatorManager sharedManager];
-        self.networkActivityIndicatorManager.enabled = YES;
+        self.terminate = terminate;
     }
     return self;
 }
@@ -61,7 +60,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     if (self.enableLogger) {
         NSLog(@"Making Request With Builder:%@, URL:%@, Body:%@, Model:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass);
     }
-    [self.networkActivityIndicatorManager incrementActivityCount];
+
     NSURLSessionDataTask *task;
     if (self.isMultipart) {
         [self.sessionManager uploadTaskWithRequest:self.urlRequest fromData:nil
@@ -80,7 +79,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 }
 
 - (void)handleResponse:(id) responseObject error:(NSError *) error {
-    [self.networkActivityIndicatorManager decrementActivityCount];
     if (error) {
         id data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
         NSString *errorMessage = [[NSString alloc] initWithData:data
@@ -102,6 +100,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         }
         [_tcs setResult:[self decodeResponseObject:responseObject]];
     }
+    self.terminate();
 }
 
 - (NSError *)getPatchedError:(id) responseObject error:(NSError *) error {
@@ -164,16 +163,18 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, assign) BOOL isJsonFormat;
 @property (nonatomic, copy) NSString *multipartFileKey;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
+@property (nonatomic, copy) void (^terminate)();
 @end
 
 @implementation OSRequestBuilder
 
-- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager {
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate {
     self = [super init];
     if (self) {
         _baseUrlString = baseURLString;
         _sessionManager = sessionManager;
         _isJsonFormat = YES;
+        _terminate = terminate;
     }
     return self;
 }
@@ -397,7 +398,8 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
                                            isJson:self.isJsonFormat
                                      enableLogger:self.enableLogger
                                      errorHandler:self.errorHandler
-                                   sessionManager:self.sessionManager];
+                                   sessionManager:self.sessionManager
+                                        terminate:self.terminate];
 }
 
 - (void)appendMultipartData:(id<AFMultipartFormData>) formData {
