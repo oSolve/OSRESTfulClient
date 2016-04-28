@@ -4,7 +4,6 @@
 //
 
 #import <Bolts/BFTask.h>
-#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "AFHTTPRequestOperation.h"
 #import "MTLModel.h"
 #import "MTLJSONAdapter.h"
@@ -13,7 +12,6 @@
 #import "OSRequestErrorHandlerProtocol.h"
 #import "OSRequestInterceptorProtocol.h"
 #import "AFHTTPSessionManager.h"
-#import <RegExCategories/RegExCategories.h>
 
 NSString *const kRequestResponseObjectKey = @"kRequestResponseObjectKey";
 
@@ -318,7 +316,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     };
 }
 
-- (OSRequestBuilder *(^)(NSString *path))setPath{
+- (OSRequestBuilder *(^)(NSString *path))setPath {
     return ^OSRequestBuilder *(NSString *path) {
         NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
         _path = path;
@@ -331,8 +329,9 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
         if (mappers) {
             for (NSString *key in mappers) {
-                NSString *pattern = [NSString stringWithFormat:@"\\{%@\\}", key];
-                path = [path replace:RX(pattern) with:mappers[key]];
+                NSString *pattern = [NSString stringWithFormat:@"{%@}", key];
+                path = [path stringByReplacingOccurrencesOfString:pattern
+                                                       withString:mappers[key]];
             }
         }
         _path = path;
