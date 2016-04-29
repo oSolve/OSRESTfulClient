@@ -18,24 +18,24 @@ OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@
 OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 BFTask *request = client.builder
-						.setPathAndParams(@"/users/{user_id}/repos", @{@"user_id" : userId})
+						.setPath(@"/repos")
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
 ```
 
-Or
+Or path with parameters:
 
 ```objc
 OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
 OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 BFTask *request = client.builder
-						.setPath(@"/repos")
+						.setPathAndParams(@"/users/{user_id}/repos", @{@"user_id" : userId})
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
-```
+```  
 
 And get the result:  
 
