@@ -32,9 +32,8 @@ Or
 OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
 OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-NSString *path = @"/repos"
 BFTask *request = client.builder
-						.setPath(path)
+						.setPath(@"/repos")
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
