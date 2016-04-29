@@ -17,10 +17,8 @@ Making a request is very easy, just use the builder pattern:
 OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
 OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-NSString *path = @"/users/{user_id}/repos"
-NSDictionary *params = @{@"user_id" : userId}
 BFTask *request = client.builder
-						.setPathAndParams(path, params)
+						.setPathAndParams(@"/users/{user_id}/repos", @{@"user_id" : userId})
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
