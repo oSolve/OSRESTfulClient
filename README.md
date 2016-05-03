@@ -14,27 +14,28 @@ OSRESTfulClient is a light-weight RESTful client for iOS APP. Inspired by [Retro
 Making a request is very easy, just use the builder pattern:
 
 ```objc
-OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue baseApiURLString:@"https://api.github.com"];
-NSString *path = @"/users/{user_id}/repos"
-NSDictionary *params = @{@"user_id" : userId}
+OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
+OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
+                                                          configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 BFTask *request = client.builder
-						.setPathAndParams(path, params)
+						.setPath(@"/repos")
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
 ```
 
-Or
+Or path with parameters:
 
 ```objc
-OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithQueue:operationQueue baseApiURLString:@"https://api.github.com"];
-NSString *path = @"/repos"
+OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@"https://api.github.com"];
+OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
+                                                          configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 BFTask *request = client.builder
-						.setPath(path)
+						.setPathAndParams(@"/users/{user_id}/repos", @{@"user_id" : userId})
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
-```
+```  
 
 And get the result:  
 
