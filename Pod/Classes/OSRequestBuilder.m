@@ -56,7 +56,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 - (BFTask *)request {
     _tcs = [BFTaskCompletionSource taskCompletionSource];
     if (self.enableLogger) {
-        NSLog(@"Making Request With Builder:%@, URL:%@, Body:%@, Model:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass);
+        NSLog(@"Making Request With Builder:%@, URL:%@, Header:%@, Body:%@, Model:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self.urlRequest allHTTPHeaderFields], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass);
     }
 
     NSURLSessionDataTask *task;
@@ -82,7 +82,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         NSString *errorMessage = [[NSString alloc] initWithData:data
                                                        encoding:NSUTF8StringEncoding];
         if (self.enableLogger) {
-            NSLog(@"Request Builder Failed:%@, URL:%@, Body:%@, Model:%@, Error:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, error);
+            NSLog(@"Request Builder Failed:%@, URL:%@, Header:%@, Body:%@, Model:%@, Error:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self.urlRequest allHTTPHeaderFields], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, error);
             NSLog(@"Decoded response error message:%@", errorMessage);
         }
         NSError *patchedError = [self getPatchedError:responseObject
@@ -94,7 +94,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         }
     } else {
         if (self.enableLogger) {
-            NSLog(@"Request Builder Success:%@, URL:%@, Body:%@, Model:%@, responseObject:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, responseObject);
+            NSLog(@"Request Builder Success:%@, URL:%@, Header:%@, Body:%@, Model:%@, responseObject:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self.urlRequest allHTTPHeaderFields], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, responseObject);
         }
         [_tcs setResult:[self decodeResponseObject:responseObject]];
     }
