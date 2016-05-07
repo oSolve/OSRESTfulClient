@@ -119,6 +119,10 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 }
 
 - (id)decodeResponseObject:(id) responseObject {
+    if (!responseObject) {
+        return nil;
+    }
+
     if ([self.modelClass isSubclassOfClass:[OSVoidType class]]) {
         return nil;
     }
