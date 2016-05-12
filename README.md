@@ -52,9 +52,9 @@ You can take full advantage of Bolts: chaining task together, error handling, ta
 * > iOS7
 
 ## Dependency
-* [Bolts Framework(1.7.0)](https://github.com/BoltsFramework/Bolts-iOS)
-* [AFNetworking(3.1.0)](https://github.com/AFNetworking/AFNetworking)
-* [Mantle(2.0.7)](https://github.com/Mantle/Mantle) (Default json decoder)
+* [Bolts Framework](https://github.com/BoltsFramework/Bolts-iOS) (1.7.0)
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking) (3.1.0)
+* [Mantle](https://github.com/Mantle/Mantle) (Default json decoder) (2.0.7)
 
 ## Installation
 
