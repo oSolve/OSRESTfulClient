@@ -3,15 +3,12 @@
 // Copyright (c) 2015 oSolve. All rights reserved.
 //
 
-#import <Bolts/BFTask.h>
-#import "AFHTTPRequestOperation.h"
-#import "MTLModel.h"
-#import "MTLJSONAdapter.h"
+#import <Bolts/Bolts.h>
+#import <AFNetworking/AFNetworking.h>
+#import <Mantle/Mantle.h>
 #import "OSRequestBuilder.h"
-#import "BFTaskCompletionSource.h"
 #import "OSRequestErrorHandlerProtocol.h"
 #import "OSRequestInterceptorProtocol.h"
-#import "AFHTTPSessionManager.h"
 
 NSString *const kRequestResponseObjectKey = @"kRequestResponseObjectKey";
 
@@ -64,24 +61,25 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         [self.sessionManager uploadTaskWithRequest:self.urlRequest fromData:nil
                                           progress:NULL
                                  completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                     [self handleResponse:responseObject error:error];
+                                     [self handleResponse:response responseObject:responseObject error:error];
                                  }];
     } else {
         task = [self.sessionManager dataTaskWithRequest:self.urlRequest
                                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                          [self handleResponse:responseObject error:error];
+                                          [self handleResponse:response responseObject:responseObject error:error];
                                       }];
     }
     [task resume];
     return self.tcs.task;
 }
 
-- (void)handleResponse:(id) responseObject error:(NSError *) error {
+- (void)handleResponse:(NSURLResponse *) response responseObject:(id) responseObject error:(NSError *) error {
     if (error) {
         id data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
         NSString *errorMessage = [[NSString alloc] initWithData:data
                                                        encoding:NSUTF8StringEncoding];
         if (self.enableLogger) {
+            NSLog(@"Response:%@", response);
             NSLog(@"Request Builder Failed:%@, URL:%@, Header:%@, Body:%@, Model:%@, Error:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self.urlRequest allHTTPHeaderFields], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, error);
             NSLog(@"Decoded response error message:%@", errorMessage);
         }
@@ -94,6 +92,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
         }
     } else {
         if (self.enableLogger) {
+            NSLog(@"Response:%@", response);
             NSLog(@"Request Builder Success:%@, URL:%@, Header:%@, Body:%@, Model:%@, responseObject:%@", self.urlRequest.HTTPMethod, [self.urlRequest URL], [self.urlRequest allHTTPHeaderFields], [self convertHttpBodyToString:self.urlRequest.HTTPBody], self.modelClass, responseObject);
         }
         [_tcs setResult:[self decodeResponseObject:responseObject]];

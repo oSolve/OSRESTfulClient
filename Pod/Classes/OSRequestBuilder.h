@@ -5,9 +5,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class BFTask;
 @protocol OSRequestErrorHandlerProtocol;
 @protocol OSRequestInterceptorProtocol;
+@class BFTask;
 @class AFURLSessionManager;
 
 // Has No Return value
