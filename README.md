@@ -6,8 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/OSRESTfulClient.svg?style=flat)](http://cocoapods.org/pods/OSRESTfulClient) -->
 
 ### Making a http request has never been easier.
-OSRESTfulClient is a light-weight RESTful client for iOS APP. Inspired by [Retrofit](https://github.com/square/retrofit) and [Masonry](https://github.com/SnapKit/Masonry).
-
+OSRESTfulClient is a light-weight RESTful client for iOS APP. Inspired by [Retrofit](https://github.com/square/retrofit) and [Masonry](https://github.com/SnapKit/Masonry). Support Http/2.
 ## Usage
 
 ### Making a request
@@ -53,9 +52,9 @@ You can take full advantage of Bolts: chaining task together, error handling, ta
 * > iOS7
 
 ## Dependency
-* [Bolts Framework](https://github.com/BoltsFramework/Bolts-iOS)
-* [AFNetworking](https://github.com/AFNetworking/AFNetworking)
-* [Mantle](https://github.com/Mantle/Mantle) (Default json decoder)
+* [Bolts Framework](https://github.com/BoltsFramework/Bolts-iOS) (1.7.0)
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking) (3.1.0)
+* [Mantle](https://github.com/Mantle/Mantle) (Default json decoder) (2.0.7)
 
 ## Installation
 
