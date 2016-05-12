@@ -57,18 +57,10 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     }
 
     NSURLSessionDataTask *task;
-    if (self.isMultipart) {
-        [self.sessionManager uploadTaskWithRequest:self.urlRequest fromData:nil
-                                          progress:NULL
-                                 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                     [self handleResponse:response responseObject:responseObject error:error];
-                                 }];
-    } else {
-        task = [self.sessionManager dataTaskWithRequest:self.urlRequest
-                                      completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                          [self handleResponse:response responseObject:responseObject error:error];
-                                      }];
-    }
+    task = [self.sessionManager dataTaskWithRequest:self.urlRequest
+                                  completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                      [self handleResponse:response responseObject:responseObject error:error];
+                                  }];
     [task resume];
     return self.tcs.task;
 }
