@@ -24,7 +24,7 @@ PODS:
   - Mantle (2.0.7):
     - Mantle/extobjc (= 2.0.7)
   - Mantle/extobjc (2.0.7)
-  - OSRESTfulClient (0.6.3):
+  - OSRESTfulClient (0.7.1):
     - AFNetworking (~> 3.1.0)
     - Bolts (~> 1.7.0)
     - Mantle (~> 2.0.7)
@@ -43,6 +43,8 @@ SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
-  OSRESTfulClient: 4178a50969634315f3251bb406068384f33ec14a
+  OSRESTfulClient: a82d55a968ea4c59e7987ed78ceac6a43fdcfc16
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: b1b6a1d2e330b5e0496a7e142882142f986e6b96
+
+COCOAPODS: 1.0.1
