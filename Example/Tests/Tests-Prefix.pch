@@ -3,5 +3,6 @@
 #ifdef __OBJC__
 
   @import Kiwi;
+  @import FBSnapshotTestCase;
 
 #endif
