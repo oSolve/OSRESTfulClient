@@ -1,13 +1,12 @@
-source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'OSRESTfulClient_Example', :exclusive => true do
-  pod "OSRESTfulClient", :path => "../"
-  pod "Mantle", "~>2.0.7"
-end
+target 'OSRESTfulClient_Example' do
+  pod 'OSRESTfulClient', :path => '../'
 
-target 'OSRESTfulClient_Tests', :exclusive => true do
-  pod "OSRESTfulClient", :path => "../"
+  target 'OSRESTfulClient_Tests' do
+    inherit! :search_paths
 
-  pod 'Kiwi'
+    pod 'Kiwi'
+  pod 'FBSnapshotTestCase'
+  end
 end
