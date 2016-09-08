@@ -40,5 +40,5 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'AFNetworking', '~> 3.1.0'
   s.dependency 'Mantle', '~> 2.0.7'
-  s.dependency 'Bolts', '~> 1.7.0'
+  s.dependency 'Bolts', '~> 1.8.4'
 end
