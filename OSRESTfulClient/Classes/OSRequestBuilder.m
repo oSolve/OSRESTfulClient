@@ -325,7 +325,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     return ^OSRequestBuilder *(NSDictionary *mappers) {
         NSString *path = self.path;
         if (mappers) {
-            for (NSString *key in mappers) {
+            for (NSString *key in mappers.allKeys) {
                 NSString *pattern = [NSString stringWithFormat:@"{%@}", key];
                 path = [path stringByReplacingOccurrencesOfString:pattern
                                                        withString:mappers[key]];
