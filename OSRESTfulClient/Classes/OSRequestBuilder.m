@@ -321,9 +321,9 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     };
 }
 
-- (OSRequestBuilder *(^)(NSString *path, NSDictionary *params))setPathAndParams {
-    return ^OSRequestBuilder *(NSString *path, NSDictionary *mappers) {
-        NSAssert([path characterAtIndex:0] == '/', @"path must be start with '/'");
+- (OSRequestBuilder *(^)(NSDictionary *params))setPathParams {
+    return ^OSRequestBuilder *(NSDictionary *mappers) {
+        NSString *path = self.path;
         if (mappers) {
             for (NSString *key in mappers) {
                 NSString *pattern = [NSString stringWithFormat:@"{%@}", key];

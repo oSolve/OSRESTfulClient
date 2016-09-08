@@ -30,7 +30,8 @@ OSRESTfulEndpoint *endpoint = [[OSRESTfulEndpoint alloc] initWithBaseURLString:@
 OSRESTfulClient *client = [[OSRESTfulClient alloc] initWithEndpoint:endpoint
                                                           configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 BFTask *request = client.builder
-						.setPathAndParams(@"/users/{user_id}/repos", @{@"user_id" : userId})
+                        .setPath(@"/users/{user_id}/repos")
+						.setPathParams(@{@"user_id" : userId})
 						.withGet
 						.buildArrayWithModel([OSRepo class])
 						.request;
