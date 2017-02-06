@@ -46,8 +46,6 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestBuilder *)withConnect;
 
-- (OSRequestBuilder *)withMultipart;
-
 - (OSRequestBuilder *)withPut;
 
 - (OSRequestBuilder *)withPatch;
