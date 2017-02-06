@@ -29,7 +29,7 @@ PODS:
   - Mantle (2.0.7):
     - Mantle/extobjc (= 2.0.7)
   - Mantle/extobjc (2.0.7)
-  - OSRESTfulClient (0.9.0):
+  - OSRESTfulClient (0.9.1):
     - AFNetworking (~> 3.1.0)
     - Bolts (~> 1.8.4)
     - Mantle (~> 2.0.7)
@@ -41,7 +41,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   OSRESTfulClient:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -49,7 +49,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 918c55861356ee83aee7843d759f55a18ff6982b
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
-  OSRESTfulClient: ad983d655b708147ac65ac30ba2980e8437c827f
+  OSRESTfulClient: 1f9bf313e92a5d9a532ad1ebbff32a0fdb6c4a02
 
 PODFILE CHECKSUM: 763f596438dfb5ffa76e847aa09797d8bc83cf77
 
