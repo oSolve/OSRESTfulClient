@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OSRESTfulClient'
-  s.version          = '0.9.1'
+  s.version          = '0.10.0'
   s.summary          = 'None'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/oSolve/OSRESTfulClient.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '8.0'
 
   s.source_files = 'OSRESTfulClient/Classes/**/*'
   
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
   s.public_header_files = 'OSRESTfulClient/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'AFNetworking', '~> 3.1.0'
-  s.dependency 'Mantle', '~> 2.0.7'
+  s.dependency 'Mantle', '~> 2.1.0'
   s.dependency 'Bolts', '~> 1.8.4'
 end

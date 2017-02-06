@@ -7,6 +7,6 @@ target 'OSRESTfulClient_Example' do
     inherit! :search_paths
 
     pod 'Kiwi'
-  pod 'FBSnapshotTestCase'
+  pod 'FBSnapshotTestCase', "~>2.1.4"
   end
 end

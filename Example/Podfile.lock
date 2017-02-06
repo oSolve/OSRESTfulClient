@@ -20,22 +20,22 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - FBSnapshotTestCase (2.1.2):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.2)
-  - FBSnapshotTestCase/Core (2.1.2)
-  - FBSnapshotTestCase/SwiftSupport (2.1.2):
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - Kiwi (2.4.0)
-  - Mantle (2.0.7):
-    - Mantle/extobjc (= 2.0.7)
-  - Mantle/extobjc (2.0.7)
-  - OSRESTfulClient (0.9.1):
+  - Mantle (2.1.0):
+    - Mantle/extobjc (= 2.1.0)
+  - Mantle/extobjc (2.1.0)
+  - OSRESTfulClient (0.10.0):
     - AFNetworking (~> 3.1.0)
     - Bolts (~> 1.8.4)
-    - Mantle (~> 2.0.7)
+    - Mantle (~> 2.1.0)
 
 DEPENDENCIES:
-  - FBSnapshotTestCase
+  - FBSnapshotTestCase (~> 2.1.4)
   - Kiwi
   - OSRESTfulClient (from `../`)
 
@@ -46,11 +46,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  FBSnapshotTestCase: 918c55861356ee83aee7843d759f55a18ff6982b
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
-  Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
-  OSRESTfulClient: 1f9bf313e92a5d9a532ad1ebbff32a0fdb6c4a02
+  Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
+  OSRESTfulClient: a6898f75c082f85b6acf17108a3684cb075f63c7
 
-PODFILE CHECKSUM: 763f596438dfb5ffa76e847aa09797d8bc83cf77
+PODFILE CHECKSUM: 3f92220f6af1a415ff37495f719f36cd6f3d50d4
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
