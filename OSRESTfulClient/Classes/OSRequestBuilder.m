@@ -25,7 +25,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, strong) NSURLRequest *urlRequest;
 @property (nonatomic, strong) Class modelClass;
 @property (nonatomic, assign) BOOL isArray;
-@property (nonatomic, assign) BOOL isMultipart;
 @property (nonatomic, assign) BOOL isJson;
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
@@ -34,13 +33,12 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @end
 
 @implementation OSRequestable
-- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isMultipart:(BOOL) isMultipart isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate {
+- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate {
     self = [super init];
     if (self) {
         self.urlRequest = urlRequest;
         self.modelClass = modelClass;
         self.isArray = isArray;
-        self.isMultipart = isMultipart;
         self.isJson = isJson;
         self.enableLogger = enableLogger;
         self.errorHandler = errorHandler;
@@ -154,7 +152,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, strong) Class modelClass;
 @property (nonatomic, strong) NSMutableDictionary *header;
 @property (nonatomic, strong) NSDictionary *multipartData;
-@property (nonatomic, assign) BOOL isMultipart;
 @property (nonatomic, assign) BOOL isJsonFormat;
 @property (nonatomic, copy) NSString *multipartFileKey;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
@@ -216,11 +213,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 
 - (OSRequestBuilder *)withConnect {
     self.method = @"CONNECT";
-    return self;
-}
-
-- (OSRequestBuilder *)withMultipart {
-    self.isMultipart = YES;
     return self;
 }
 
@@ -379,9 +371,8 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     }
     NSString *escapedPath = [self.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSMutableURLRequest *request;
-    if (self.isMultipart) {
+    if (self.multipartData) {
         __weak typeof(self) weakSelf = self;
-        NSAssert(self.multipartData, @"multipart upload, multipart data cannot be nil");
         request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:self.method
                                                                              URLString:[self requestURL:escapedPath]
                                                                             parameters:self.params
@@ -398,7 +389,6 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     return [[OSRequestable alloc] initWithRequest:request
                                        modelClass:self.modelClass
                                           isArray:isArray
-                                      isMultipart:self.isMultipart
                                            isJson:self.isJsonFormat
                                      enableLogger:self.enableLogger
                                      errorHandler:self.errorHandler
@@ -410,7 +400,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     for (int i = 0; i < self.multipartData.allKeys.count; ++i) {
         id key = self.multipartData.allKeys[i];
         [formData appendPartWithFileData:self.multipartData[key]
-                                    name:self.multipartFileKey ?: key
+                                    name:self.multipartFileKey ? : key
                                 fileName:[NSString stringWithFormat:@"%@.png", key]
                                 mimeType:MULTIPART_MIME_TYPE];
     }
