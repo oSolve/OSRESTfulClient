@@ -263,13 +263,25 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 
 - (OSRequestBuilder *(^)(NSString *name, NSData *data))addData {
     return ^OSRequestBuilder *(NSString *name, NSData *data) {
-        self.multipartData = @{name : data};
+        if (!data) {
+            return self;
+        }
+        if (self.multipartData) {
+            NSMutableDictionary *mutableDictionary = [self.multipartData mutableCopy];
+            [mutableDictionary addEntriesFromDictionary:@{name : data}];
+            self.multipartData = [mutableDictionary copy];
+        } else {
+            self.multipartData = @{name : data};
+        }
         return self;
     };
 }
 
 - (OSRequestBuilder *(^)(NSString *, NSDictionary *))addMultipleData {
     return ^OSRequestBuilder *(NSString *key, NSDictionary *multipleData) {
+        if (!multipleData) {
+            return self;
+        }
         self.multipartFileKey = key;
         if (self.multipartData) {
             NSMutableDictionary *mutableDictionary = [self.multipartData mutableCopy];
