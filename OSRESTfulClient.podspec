@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OSRESTfulClient'
-  s.version          = '0.10.0'
+  s.version          = '0.10.1'
   s.summary          = 'None'
 
 # This description is used to generate tags and improve search results.
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   # }
 
   s.public_header_files = 'OSRESTfulClient/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  # s.frameworks = 'UIKit'
   s.dependency 'AFNetworking', '~> 3.1.0'
   s.dependency 'Mantle', '~> 2.1.0'
   s.dependency 'Bolts', '~> 1.8.4'
