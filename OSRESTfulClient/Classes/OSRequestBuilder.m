@@ -421,7 +421,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 - (void)insertHeaderToRequest:(NSMutableURLRequest *) request {
     if (self.header) {
         for (NSString *key in self.header.allKeys) {
-            [request addValue:key forHTTPHeaderField:self.header[key]];
+            [request addValue:self.header[key] forHTTPHeaderField:key];
         }
     }
 }
