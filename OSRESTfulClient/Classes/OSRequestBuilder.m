@@ -437,6 +437,10 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     return error.userInfo[kRequestResponseObjectKey];
 }
 
+- (NSDictionary *)headerFields {
+    return [self.header copy];
+}
+
 + (NSInteger)httpStatusCodeFromError:(NSError *) error {
     return [error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
 }

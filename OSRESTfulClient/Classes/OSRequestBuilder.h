@@ -74,6 +74,8 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestable *)buildRawData;
 
+- (NSDictionary *)headerFields;
+
 + (id)responseObjectFromError:(NSError *) error;
 
 + (NSInteger)httpStatusCodeFromError:(NSError *) error;
