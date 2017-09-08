@@ -251,12 +251,14 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     return [self buildWithModel:modelClass isArray:YES];
 }
 
-- (OSRequestBuilder *(^)(NSDictionary *header))addHeader {
-    return ^OSRequestBuilder *(NSDictionary *header) {
+- (OSRequestBuilder *(^)(NSString *key, id value))addHeader {
+    return ^OSRequestBuilder *(NSString *key, id value) {
+        NSAssert(key, @"param key can not be nil");
+        NSAssert(value, @"param value can not be nil");
         if (!self.header) {
             self.header = [NSMutableDictionary dictionary];
         }
-        [self.header addEntriesFromDictionary:header];
+        self.header[key] = value;
         return self;
     };
 }
