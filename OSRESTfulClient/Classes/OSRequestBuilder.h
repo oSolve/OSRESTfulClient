@@ -56,7 +56,7 @@ extern NSString *const kRequestResponseObjectKey;
 
 - (OSRequestBuilder *(^)(BOOL isJson))isJson;
 
-- (OSRequestBuilder *(^)(NSDictionary *header))addHeader;
+- (OSRequestBuilder *(^)(NSString *key, id value))addHeader;
 
 - (OSRequestBuilder *(^)(NSString *name, NSData *data))addData;
 
@@ -73,6 +73,8 @@ extern NSString *const kRequestResponseObjectKey;
 - (OSRequestable *)buildVoid;
 
 - (OSRequestable *)buildRawData;
+
+- (NSDictionary *)headerFields;
 
 + (id)responseObjectFromError:(NSError *) error;
 

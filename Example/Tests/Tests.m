@@ -80,6 +80,13 @@ SPEC_BEGIN(InitialTests)
                                                                            @"tid" : @"a1a1"});
                 [[builder.path should] equal:@"/posts/1/aaa.json"];
             });
+            it(@"Add header", ^{
+                OSRequestBuilder *builder = [[OSRequestBuilder alloc] initWithBaseURLString:@""
+                                                                             sessionManager:[AFURLSessionManager mock]
+                                                                                  terminate:nil];
+                builder.addHeader(@"key1", @"value1");
+                [[builder.headerFields[@"key1"] should] equal:@"value1"];
+            });
         });
     });
 

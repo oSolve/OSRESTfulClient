@@ -251,12 +251,14 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
     return [self buildWithModel:modelClass isArray:YES];
 }
 
-- (OSRequestBuilder *(^)(NSDictionary *header))addHeader {
-    return ^OSRequestBuilder *(NSDictionary *header) {
+- (OSRequestBuilder *(^)(NSString *key, id value))addHeader {
+    return ^OSRequestBuilder *(NSString *key, id value) {
+        NSAssert(key, @"param key can not be nil");
+        NSAssert(value, @"param value can not be nil");
         if (!self.header) {
             self.header = [NSMutableDictionary dictionary];
         }
-        [self.header addEntriesFromDictionary:header];
+        self.header[key] = value;
         return self;
     };
 }
@@ -421,7 +423,7 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 - (void)insertHeaderToRequest:(NSMutableURLRequest *) request {
     if (self.header) {
         for (NSString *key in self.header.allKeys) {
-            [request addValue:key forHTTPHeaderField:self.header[key]];
+            [request addValue:self.header[key] forHTTPHeaderField:key];
         }
     }
 }
@@ -433,6 +435,10 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 
 + (id)responseObjectFromError:(NSError *) error {
     return error.userInfo[kRequestResponseObjectKey];
+}
+
+- (NSDictionary *)headerFields {
+    return [self.header copy];
 }
 
 + (NSInteger)httpStatusCodeFromError:(NSError *) error {
