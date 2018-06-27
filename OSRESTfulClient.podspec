@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'OSRESTfulClient/Classes/**/*.h'
   # s.frameworks = 'UIKit'
-  s.dependency 'AFNetworking', '~> 3.1.0'
+  s.dependency 'AFNetworking', '~> 3.2.1'
   s.dependency 'Mantle', '~> 2.1.0'
-  s.dependency 'Bolts', '~> 1.8.4'
+  s.dependency 'Bolts', '~> 1.9.0'
 end
