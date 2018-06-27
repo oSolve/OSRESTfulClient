@@ -29,11 +29,11 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, assign) BOOL enableLogger;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
-@property (nonatomic, copy) void (^terminate)();
+@property (nonatomic, copy) void (^terminate)(void);
 @end
 
 @implementation OSRequestable
-- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate {
+- (instancetype)initWithRequest:(NSURLRequest *) urlRequest modelClass:(Class) modelClass isArray:(BOOL) isArray isJson:(BOOL) isJson enableLogger:(BOOL) enableLogger errorHandler:(id<OSRequestErrorHandlerProtocol>) errorHandler sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)(void)) terminate {
     self = [super init];
     if (self) {
         self.urlRequest = urlRequest;
@@ -56,6 +56,8 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 
     NSURLSessionDataTask *task;
     task = [self.sessionManager dataTaskWithRequest:self.urlRequest
+                                     uploadProgress:nil
+                                   downloadProgress:nil
                                   completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                                       [self handleResponse:response responseObject:responseObject error:error];
                                   }];
@@ -155,12 +157,12 @@ static NSString *const MULTIPART_MIME_TYPE = @"image/jpeg";
 @property (nonatomic, assign) BOOL isJsonFormat;
 @property (nonatomic, copy) NSString *multipartFileKey;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
-@property (nonatomic, copy) void (^terminate)();
+@property (nonatomic, copy) void (^terminate)(void);
 @end
 
 @implementation OSRequestBuilder
 
-- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate {
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)(void)) terminate {
     self = [super init];
     if (self) {
         _baseUrlString = baseURLString;

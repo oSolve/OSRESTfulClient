@@ -30,7 +30,7 @@ extern NSString *const kRequestResponseObjectKey;
 @property (nonatomic, strong) id<OSRequestErrorHandlerProtocol> errorHandler;
 @property (nonatomic, readonly, copy) NSString *path;
 
-- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)()) terminate;
+- (instancetype)initWithBaseURLString:(NSString *) baseURLString sessionManager:(AFURLSessionManager *) sessionManager terminate:(void (^)(void)) terminate;
 
 - (OSRequestBuilder *)withOptions;
 
